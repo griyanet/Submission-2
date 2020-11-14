@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Submission2</string>
+    <string name="name">Name</string>
+    <string name="location">Location</string>
+    <string name="no_follower">Follower</string>
+    <string name="no_following">Following</string>
+    <string name="starred">Starred</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
+    <string name="github_avatar">Github Avatar</string>
+
+    <string name="follower_fragment">this is follower fragment</string>
+    <string name="following_fragment">this is following fragment</string>
+</resources>
