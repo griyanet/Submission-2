@@ -11,4 +11,9 @@
 
     <string name="follower_fragment">this is follower fragment</string>
     <string name="following_fragment">this is following fragment</string>
+    <string name="username">Username</string>
+    <string name="user_url">User URL</string>
+    <string name="follower_url">Follower URL</string>
+    <string name="following_url">Following URL</string>
+    <string name="avatar_image">Avatar Image</string>
 </resources>
