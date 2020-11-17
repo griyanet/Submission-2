@@ -1,4 +1,4 @@
-package com.griyanet.submission2
+package com.griyanet.submission2.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.griyanet.submission2.Model.UserItem
+import com.griyanet.submission2.R
 import kotlinx.android.synthetic.main.row_itemuser.view.*
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {

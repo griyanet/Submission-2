@@ -8,6 +8,10 @@
     <string name="follower">Follower</string>
     <string name="following">Following</string>
     <string name="github_avatar">Github Avatar</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Masukkan kata</string>
+    <string name="menu_1">Announcement</string>
+    <string name="menu_2">Setting</string>
 
     <string name="follower_fragment">this is follower fragment</string>
     <string name="following_fragment">this is following fragment</string>
