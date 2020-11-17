@@ -24,30 +24,30 @@ class MainViewModel(private val repository: Repository): ViewModel() {
         }
     }
 
-    fun getUserQuery() {
+    fun getUserQuery(username: String) {
         viewModelScope.launch {
-            val response = repository.getUserQuery()
+            val response = repository.getUserQuery(username)
             userQuery.value = response
         }
     }
 
-    fun getUserDetail() {
+    fun getUserDetail(username: String) {
         viewModelScope.launch {
-            val response = repository.getUserDetail()
+            val response = repository.getUserDetail(username)
             userDetails.value = response
         }
     }
 
-    fun getUserFollwer() {
+    fun getUserFollwer(username: String) {
         viewModelScope.launch {
-            val response = repository.getUserFollower()
+            val response = repository.getUserFollower(username)
             userFollower.value = response
         }
     }
 
-    fun getUserFollowing() {
+    fun getUserFollowing(username: String) {
         viewModelScope.launch {
-            val response = repository.getUserFollowing()
+            val response = repository.getUserFollowing(username)
             userFollowing.value = response
         }
     }

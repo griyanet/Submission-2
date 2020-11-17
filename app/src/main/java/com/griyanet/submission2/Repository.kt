@@ -12,19 +12,19 @@ class Repository {
         return RetrofitInstance.api.getUser()
     }
 
-    suspend fun getUserQuery(): Response<UserQuery> {
-        return RetrofitInstance.api.getUserQuery(username = String())
+    suspend fun getUserQuery(username: String): Response<UserQuery> {
+        return RetrofitInstance.api.getUserQuery(username)
     }
 
-    suspend fun getUserDetail(): Response<ArrayList<UserDetails>> {
-        return RetrofitInstance.api.getUserDetail(username = String())
+    suspend fun getUserDetail(username: String): Response<ArrayList<UserDetails>> {
+        return RetrofitInstance.api.getUserDetail(username)
     }
 
-    suspend fun getUserFollower(): Response<ArrayList<UserItem>> {
-        return RetrofitInstance.api.getUserFollower(username = String())
+    suspend fun getUserFollower(username: String): Response<ArrayList<UserItem>> {
+        return RetrofitInstance.api.getUserFollower(username)
     }
 
-    suspend fun getUserFollowing(): Response<ArrayList<UserItem>> {
-        return RetrofitInstance.api.getUserFollowing(username = String())
+    suspend fun getUserFollowing(username: String): Response<ArrayList<UserItem>> {
+        return RetrofitInstance.api.getUserFollowing(username)
     }
 }

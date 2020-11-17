@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewmodel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        viewmodel.getUserQuery()
+        viewmodel.getUserQuery(username)
         viewmodel.userQuery.observe(this, { response ->
             if (response.isSuccessful) {
                 fadeIn()

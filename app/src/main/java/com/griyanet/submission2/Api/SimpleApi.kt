@@ -14,7 +14,7 @@ interface SimpleApi {
     suspend fun getUser(): Response<ArrayList<UserItem>>
 
     @GET("search/users")
-    suspend fun getUserQuery(@Query("q") username: String): Response<UserQuery>
+    suspend fun getUserQuery(@Query("q") login: String): Response<UserQuery>
 
     @GET("users/{username}")
     suspend fun getUserDetail(@Path("username") username: String): Response<ArrayList<UserDetails>>
