@@ -16,4 +16,5 @@
     <string name="follower_url">Follower URL</string>
     <string name="following_url">Following URL</string>
     <string name="avatar_image">Avatar Image</string>
+    <string name="no_Internet">Could not retrieve data. Trying again...</string>
 </resources>

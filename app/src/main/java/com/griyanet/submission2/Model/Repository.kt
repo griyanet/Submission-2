@@ -4,7 +4,7 @@ import com.griyanet.submission2.Api.RetrofitInstance
 import retrofit2.Response
 
 class Repository {
-    suspend fun getUser(): Response<ArrayList<User>> {
+    suspend fun getUser(): Response<ArrayList<UserItem>> {
         return RetrofitInstance.api.getUser()
     }
 }

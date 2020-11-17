@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity() {
                 showLoading(false)
                 response.body()?.let { myAdapter.setData(it) }
             } else {
-                Toast.makeText(this, response.code(), Toast.LENGTH_SHORT).show()
                 Log.d("MainActivity", "Something wrong..... response code: ${response.code()}")
                 showLoading(true)
                 attemptReqAgain(seconds)
