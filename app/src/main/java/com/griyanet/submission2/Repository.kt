@@ -1,9 +1,9 @@
 package com.griyanet.submission2
 
-import com.griyanet.submission2.Api.RetrofitInstance
-import com.griyanet.submission2.Model.UserDetails
-import com.griyanet.submission2.Model.UserItem
-import com.griyanet.submission2.Model.UserQuery
+import com.griyanet.submission2.api.RetrofitInstance
+import com.griyanet.submission2.model.UserDetails
+import com.griyanet.submission2.model.UserItem
+import com.griyanet.submission2.model.UserQuery
 import retrofit2.Response
 
 class Repository {

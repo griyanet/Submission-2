@@ -1,4 +1,4 @@
-package com.griyanet.submission2.Model
+package com.griyanet.submission2.model
 
 data class UserQuery(
         val incomplete_results: Boolean,

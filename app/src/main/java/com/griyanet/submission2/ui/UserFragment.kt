@@ -1,4 +1,4 @@
-package com.griyanet.submission2.UI
+package com.griyanet.submission2.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.griyanet.submission2.Adapter.UserAdapter
 import com.griyanet.submission2.MainViewModel
 import com.griyanet.submission2.MainViewModelFactory
-import com.griyanet.submission2.Model.UserItem
 import com.griyanet.submission2.R
 import com.griyanet.submission2.Repository
+import com.griyanet.submission2.adapter.UserAdapter
+import com.griyanet.submission2.model.UserItem
 import kotlinx.android.synthetic.main.user_fragment.*
 import retrofit2.Response
 

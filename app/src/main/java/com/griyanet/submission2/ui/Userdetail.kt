@@ -1,9 +1,9 @@
-package com.griyanet.submission2.UI
+package com.griyanet.submission2.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.griyanet.submission2.Adapter.SectionsPagerAdapter
 import com.griyanet.submission2.R
+import com.griyanet.submission2.adapter.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.activity_userdetail.*
 
 class Userdetail : AppCompatActivity() {

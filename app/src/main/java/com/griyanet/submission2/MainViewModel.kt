@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.griyanet.submission2.Model.UserDetails
-import com.griyanet.submission2.Model.UserItem
-import com.griyanet.submission2.Model.UserQuery
+import com.griyanet.submission2.model.UserDetails
+import com.griyanet.submission2.model.UserItem
+import com.griyanet.submission2.model.UserQuery
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

@@ -1,4 +1,4 @@
-package com.griyanet.submission2.UI
+package com.griyanet.submission2.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

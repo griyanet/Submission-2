@@ -1,5 +1,9 @@
-package com.griyanet.submission2.Model
+package com.griyanet.submission2.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Item(
         val avatar_url: String,
         val events_url: String,
@@ -20,4 +24,4 @@ data class Item(
         val subscriptions_url: String,
         val type: String,
         val url: String
-)
+) : Parcelable

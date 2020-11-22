@@ -1,4 +1,4 @@
-package com.griyanet.submission2.Api
+package com.griyanet.submission2.api
 
 class Constant {
 

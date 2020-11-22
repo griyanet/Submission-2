@@ -1,7 +1,7 @@
-package com.griyanet.submission2.Api
+package com.griyanet.submission2.api
 
-import com.griyanet.submission2.Api.Constant.Companion.BASE_URL
-import com.griyanet.submission2.Api.Constant.Companion.TOKEN
+import com.griyanet.submission2.api.Constant.Companion.BASE_URL
+import com.griyanet.submission2.api.Constant.Companion.TOKEN
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
