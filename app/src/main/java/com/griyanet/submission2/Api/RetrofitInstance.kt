@@ -29,7 +29,7 @@ object RetrofitInstance {
             .writeTimeout(25, TimeUnit.SECONDS)
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer " + TOKEN)
+                    .addHeader("Authorization", "griyanet:" + TOKEN)
                     .build()
                 chain.proceed(newRequest)
             }

@@ -4,19 +4,46 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
-import com.griyanet.submission2.UI.UserQueryFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.griyanet.submission2.Adapter.UserQueryAdapter
+import kotlinx.android.synthetic.main.user_fragment.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
-
+    private val userAdapter by lazy { UserQueryAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        rv_user.setHasFixedSize(true)
+        rv_user.adapter = userAdapter
+        rv_user.layoutManager = LinearLayoutManager(this)
+
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        viewModel.getUserQuery("a")
+        viewModel.userQuery.observe(this, {
+            it.body()?.items.let {
+                if (it != null) {
+                    userAdapter.setData(it)
+                }
+            }
+        })
+        fadeIn()
+        viewModel.loading.observe(this, {
+            if (it) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
+        })
 
     }
 
@@ -43,15 +70,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goUserQuery(query: String) {
-        val repository = Repository()
-        val factory = MainViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
+        //val repository = Repository()
+        //val factory = MainViewModelFactory(repository)
+        //viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
         viewModel.getUserQuery(query)
+        viewModel.userQuery.observe(this, {
+            it.body()?.items.let {
+                if (it != null) {
+                    userAdapter.setData(it)
+                }
+            }
+        })
+        fadeIn()
+        viewModel.loading.observe(this, {
+            if (it) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
+        })
 
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment, UserQueryFragment.newInstance(), "user_query_fragment")
-            .commit()
+    }
+
+    private fun fadeIn() {
+        v_blackScreen.animate().apply {
+            alpha(0f)
+            duration = 3000
+        }.start()
     }
 
 }
