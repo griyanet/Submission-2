@@ -1,6 +1,7 @@
 package com.griyanet.submission2.Api
 
 import com.griyanet.submission2.Api.Constant.Companion.BASE_URL
+import com.griyanet.submission2.Api.Constant.Companion.TOKEN
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,10 +12,10 @@ object RetrofitInstance {
 
     private val retrofit by lazy {
         Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     private val interceptor = HttpLoggingInterceptor().apply {
@@ -23,9 +24,15 @@ object RetrofitInstance {
 
     private val client = OkHttpClient.Builder().apply {
         this.addInterceptor(interceptor)
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
-                .writeTimeout(25, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(25, TimeUnit.SECONDS)
+            .addInterceptor { chain ->
+                val newRequest = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer " + TOKEN)
+                    .build()
+                chain.proceed(newRequest)
+            }
     }.build()
 
     val api: SimpleApi by lazy {
