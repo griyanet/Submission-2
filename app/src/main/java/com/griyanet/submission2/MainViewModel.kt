@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.griyanet.submission2.model.FollowersItem
 import com.griyanet.submission2.model.UserDetails
 import com.griyanet.submission2.model.UserItem
 import com.griyanet.submission2.model.UserQuery
@@ -20,16 +21,18 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     val userQuery: LiveData<Response<UserQuery>>
         get() = _userQuery
 
-    private val _userDetails: MutableLiveData<Response<ArrayList<UserDetails>>> = MutableLiveData()
-    val userDetails: LiveData<Response<ArrayList<UserDetails>>>
+    private val _userDetails: MutableLiveData<Response<UserDetails>> = MutableLiveData()
+    val userDetails: LiveData<Response<UserDetails>>
         get() = _userDetails
 
-    private val _userFollower: MutableLiveData<Response<ArrayList<UserItem>>> = MutableLiveData()
-    val userFollower: LiveData<Response<ArrayList<UserItem>>>
+    private val _userFollower: MutableLiveData<Response<ArrayList<FollowersItem>>> =
+        MutableLiveData()
+    val userFollower: LiveData<Response<ArrayList<FollowersItem>>>
         get() = _userFollower
 
-    private val _userFollowing: MutableLiveData<Response<ArrayList<UserItem>>> = MutableLiveData()
-    val userFollowing: LiveData<Response<ArrayList<UserItem>>>
+    private val _userFollowing: MutableLiveData<Response<ArrayList<FollowersItem>>> =
+        MutableLiveData()
+    val userFollowing: LiveData<Response<ArrayList<FollowersItem>>>
         get() = _userFollowing
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
@@ -49,7 +52,6 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getUserQuery(username: String) {
-        loading.value = true
         viewModelScope.launch {
             val response = repository.getUserQuery(username)
             _userQuery.value = response
@@ -68,6 +70,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch {
             val response = repository.getUserFollower(username)
             _userFollower.value = response
+            loading.value = false
         }
     }
 
@@ -75,6 +78,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch {
             val response = repository.getUserFollowing(username)
             _userFollowing.value = response
+            loading.value = false
         }
     }
 

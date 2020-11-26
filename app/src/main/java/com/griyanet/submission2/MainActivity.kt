@@ -29,24 +29,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        rv_user.setHasFixedSize(true)
-        rv_user.adapter = userAdapter
-        rv_user.layoutManager = LinearLayoutManager(this)
-
         userAdapter = UserQueryAdapter(this, listUserQuery) {
             val intent = Intent(this, Userdetail::class.java)
             intent.putExtra(USERNAME, it)
             startActivity(intent)
         }
 
+        rv_user.setHasFixedSize(true)
+        rv_user.adapter = userAdapter
+        rv_user.layoutManager = LinearLayoutManager(this)
+
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.getUserQuery("a")
-        viewModel.userQuery.observe(this, {
-            it.body()?.items.let {
+        viewModel.userQuery.observe(this, { response ->
+            response.body()?.items.let {
                 if (it != null) {
-                    userAdapter.setData(it)
+                    listUserQuery.clear()
+                    listUserQuery.addAll(it)
+                    userAdapter.notifyDataSetChanged()
                 }
             }
         })
@@ -83,14 +85,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goUserQuery(query: String) {
-        //val repository = Repository()
-        //val factory = MainViewModelFactory(repository)
-        //viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
         viewModel.getUserQuery(query)
-        viewModel.userQuery.observe(this, {
-            it.body()?.items.let {
+        viewModel.userQuery.observe(this, { response ->
+            response.body()?.items.let {
                 if (it != null) {
-                    userAdapter.setData(it)
+                    listUserQuery.clear()
+                    listUserQuery.addAll(it)
+                    userAdapter.notifyDataSetChanged()
                 }
             }
         })

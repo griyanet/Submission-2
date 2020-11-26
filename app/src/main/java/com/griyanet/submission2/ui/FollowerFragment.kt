@@ -1,60 +1,86 @@
 package com.griyanet.submission2.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.griyanet.submission2.MainViewModel
+import com.griyanet.submission2.MainViewModelFactory
 import com.griyanet.submission2.R
+import com.griyanet.submission2.Repository
+import com.griyanet.submission2.adapter.FollowerAdapter
+import kotlinx.android.synthetic.main.fragment_follower.*
+import kotlinx.android.synthetic.main.user_fragment.progressBar
+import kotlinx.android.synthetic.main.user_fragment.v_blackScreen
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Follower.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FollowerFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    companion object {
+        const val ARG_USERNAME = "username"
+
+        fun newInstance(username: String): FollowerFragment {
+            val fragment = FollowerFragment()
+            val bundle = Bundle()
+            bundle.putString(ARG_USERNAME, username)
+            fragment.arguments = bundle
+            return fragment
         }
     }
+
+    private lateinit var viewModel: MainViewModel
+    private val userAdapter by lazy { FollowerAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_follower, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Follower.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FollowerFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val username = arguments?.getString(ARG_USERNAME)
+        Log.d(username, "username")
+
+        rv_userFollower.layoutManager = LinearLayoutManager(activity)
+        rv_userFollower.setHasFixedSize(true)
+        rv_userFollower.adapter = userAdapter
+
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        if (username != null) {
+            viewModel.getUserFollower(username)
+        }
+        viewModel.userFollower.observe(viewLifecycleOwner, { response ->
+            response.body().let {
+                if (it != null) {
+                    userAdapter.setData(it)
                 }
             }
+        })
+
+
+        fadeIn()
+        viewModel.loading.observe(viewLifecycleOwner, {
+            if (it) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
+        })
     }
+
+    private fun fadeIn() {
+        v_blackScreen.animate().apply {
+            alpha(0f)
+            duration = 3000
+        }.start()
+    }
+
 }

@@ -47,9 +47,4 @@ class UserQueryAdapter(
 
     override fun getItemCount(): Int = list.size
 
-    fun setData(newList: List<Item>) {
-        list = newList as ArrayList<Item>
-        notifyDataSetChanged()
-    }
-
 }

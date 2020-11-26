@@ -1,5 +1,6 @@
 package com.griyanet.submission2.api
 
+import com.griyanet.submission2.model.FollowersItem
 import com.griyanet.submission2.model.UserDetails
 import com.griyanet.submission2.model.UserItem
 import com.griyanet.submission2.model.UserQuery
@@ -17,12 +18,12 @@ interface SimpleApi {
     suspend fun getUserQuery(@Query("q") login: String): Response<UserQuery>
 
     @GET("users/{username}")
-    suspend fun getUserDetail(@Path("username") username: String): Response<ArrayList<UserDetails>>
+    suspend fun getUserDetail(@Path("username") username: String): Response<UserDetails>
 
     @GET("users/{username}/followers")
-    suspend fun getUserFollower(@Query("q") username: String): Response<ArrayList<UserItem>>
+    suspend fun getUserFollower(@Path("username") username: String): Response<ArrayList<FollowersItem>>
 
     @GET("users/{username}/following")
-    suspend fun getUserFollowing(@Query("q") username: String): Response<ArrayList<UserItem>>
+    suspend fun getUserFollowing(@Path("username") username: String): Response<ArrayList<FollowersItem>>
 
 }
