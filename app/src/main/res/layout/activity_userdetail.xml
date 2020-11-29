@@ -26,8 +26,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:gravity="right"
-        android:text="Login"
+        android:gravity="end"
+        android:text="@string/login"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@id/dashSign"
@@ -41,7 +41,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:text="--"
+        android:text="@string/dash"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@id/tv_name"
         app:layout_constraintStart_toEndOf="@id/tv_loginId"
@@ -70,6 +70,7 @@
         android:src="@drawable/ic_baseline_location_on_24"
         app:layout_constraintEnd_toStartOf="@+id/tv_location"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
+        android:contentDescription="@string/location_icon"
         app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
     <TextView
@@ -95,6 +96,7 @@
         android:src="@drawable/ic_baseline_business_24"
         app:layout_constraintEnd_toStartOf="@+id/tv_company"
         app:layout_constraintStart_toEndOf="@+id/guideline2"
+        android:contentDescription="@string/company_icon"
         app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
     <TextView
@@ -118,7 +120,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="1dp"
-        android:text="Follower: "
+        android:text="@string/lblfollower"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_follower"
         app:layout_constraintStart_toEndOf="@id/tv_follower"
@@ -145,7 +147,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="1dp"
-        android:text="Following: "
+        android:text="@string/lblfollowing"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_follower"
         app:layout_constraintEnd_toStartOf="@id/tv_following"

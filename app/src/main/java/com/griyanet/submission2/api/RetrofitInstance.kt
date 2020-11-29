@@ -10,14 +10,6 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
 
-    private val retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
     private val interceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
@@ -34,6 +26,14 @@ object RetrofitInstance {
                 chain.proceed(newRequest)
             }
     }.build()
+
+    private val retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
     val api: SimpleApi by lazy {
         retrofit.create(SimpleApi::class.java)

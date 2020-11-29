@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Submission2</string>
-    <string name="name">Name</string>
+    <string name="name">UserName</string>
     <string name="location">Location</string>
     <string name="no_follower">Follower</string>
     <string name="no_following">Following</string>
@@ -9,16 +9,20 @@
     <string name="following">Following</string>
     <string name="github_avatar">Github Avatar</string>
     <string name="search">Search</string>
-    <string name="search_hint">Masukkan kata</string>
+    <string name="search_hint">Enter the phrase</string>
     <string name="menu_1">Announcement</string>
-    <string name="menu_2">Setting</string>
+    <string name="menu_2">Change Language Setting</string>
 
-    <string name="follower_fragment">this is follower fragment</string>
-    <string name="following_fragment">this is following fragment</string>
     <string name="username">Username</string>
     <string name="user_url">User URL</string>
     <string name="follower_url">Follower URL</string>
     <string name="following_url">Following URL</string>
     <string name="avatar_image">Avatar Image</string>
     <string name="no_Internet">Could not retrieve data. Trying again...</string>
+    <string name="login">Login</string>
+    <string name="dash">--</string>
+    <string name="lblfollower">Follower:</string>
+    <string name="lblfollowing">Following:</string>
+    <string name="company_icon">Company icon</string>
+    <string name="location_icon">Location icon</string>
 </resources>

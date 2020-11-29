@@ -31,8 +31,8 @@ class Userdetail : AppCompatActivity() {
         val adapter = SectionsPagerAdapter(this, supportFragmentManager)
         adapter.username = username
         view_pager.adapter = adapter
-        adapter.addFragment(FollowerFragment(), "Follower")
-        adapter.addFragment(FollowingFragment(), "Following")
+        adapter.addFragment(FollowerFragment(), resources.getString(R.string.follower))
+        adapter.addFragment(FollowingFragment(), resources.getString(R.string.following))
         tabs.setupWithViewPager(view_pager)
         adapter.notifyDataSetChanged()
 
