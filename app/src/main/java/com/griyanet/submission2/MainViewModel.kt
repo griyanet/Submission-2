@@ -37,11 +37,6 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
 
-    init {
-
-
-    }
-
     fun getUser() {
         loading.value = true
         viewModelScope.launch {
@@ -52,6 +47,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getUserQuery(username: String) {
+        loading.value = true
         viewModelScope.launch {
             val response = repository.getUserQuery(username)
             _userQuery.value = response
@@ -60,6 +56,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getUserDetail(username: String) {
+        loading.value = true
         viewModelScope.launch {
             val response = repository.getUserDetail(username)
             _userDetails.value = response
@@ -67,6 +64,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getUserFollower(username: String) {
+        loading.value = true
         viewModelScope.launch {
             val response = repository.getUserFollower(username)
             _userFollower.value = response
@@ -75,12 +73,14 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getUserFollowing(username: String) {
+        loading.value = true
         viewModelScope.launch {
             val response = repository.getUserFollowing(username)
             _userFollowing.value = response
             loading.value = false
         }
     }
+
 
     override fun onCleared() {
         super.onCleared()

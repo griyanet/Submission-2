@@ -21,14 +21,12 @@ class FollowerFragment : Fragment() {
 
     companion object {
         const val ARG_USERNAME = "username"
-
-        fun newInstance(username: String): FollowerFragment {
-            val fragment = FollowerFragment()
-            val bundle = Bundle()
-            bundle.putString(ARG_USERNAME, username)
-            fragment.arguments = bundle
-            return fragment
-        }
+        fun newInstance(username: String) =
+            FollowerFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_USERNAME, username)
+                }
+            }
     }
 
     private lateinit var viewModel: MainViewModel
@@ -45,7 +43,7 @@ class FollowerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val username = arguments?.getString(ARG_USERNAME)
-        Log.d(username, "username")
+        username?.let { Log.d("ARG_USERNAME", it) }
 
         rv_userFollower.layoutManager = LinearLayoutManager(activity)
         rv_userFollower.setHasFixedSize(true)
@@ -64,7 +62,6 @@ class FollowerFragment : Fragment() {
                 }
             }
         })
-
 
         fadeIn()
         viewModel.loading.observe(viewLifecycleOwner, {

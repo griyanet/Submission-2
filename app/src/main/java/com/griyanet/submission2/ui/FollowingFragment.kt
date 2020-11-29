@@ -43,7 +43,7 @@ class FollowingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val username = arguments?.getString(FollowerFragment.ARG_USERNAME)
-        Log.d(username, "username")
+        username?.let { Log.d("ARG_USERNAME", it) }
 
         rv_userFollowing.layoutManager = LinearLayoutManager(activity)
         rv_userFollowing.setHasFixedSize(true)
@@ -62,7 +62,6 @@ class FollowingFragment : Fragment() {
                 }
             }
         })
-
 
         fadeIn()
         viewModel.loading.observe(viewLifecycleOwner, {

@@ -68,33 +68,29 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.option_menu, menu)
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.id.search).actionView as SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        searchView.queryHint = resources.getString(R.string.search_hint)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                goUserQuery(query)
-                return true
-            }
+        (menu.findItem(R.id.search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            queryHint.let { resources.getString(R.string.search_hint) }
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if (query != null) {
+                        goUserQuery(query)
+                    }
+                    return true
+                }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                return false
-            }
-        })
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
+
+            })
+        }
         return true
     }
 
     fun goUserQuery(query: String) {
         viewModel.getUserQuery(query)
-        viewModel.userQuery.observe(this, { response ->
-            response.body()?.items.let {
-                if (it != null) {
-                    listUserQuery.clear()
-                    listUserQuery.addAll(it)
-                    userAdapter.notifyDataSetChanged()
-                }
-            }
-        })
+
         fadeIn()
         viewModel.loading.observe(this, {
             if (it) {
