@@ -36,6 +36,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         get() = _userFollowing
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
+    var userName: String = "a"
 
     fun getUser() {
         loading.value = true
@@ -46,10 +47,17 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun getUserQuery(username: String) {
+    fun getQueryUser(username: String): LiveData<Response<UserQuery>> {
+        if (username != null) {
+            userName = username
+        }
+        return userQuery
+    }
+
+    fun getUserQuery() {
         loading.value = true
         viewModelScope.launch {
-            val response = repository.getUserQuery(username)
+            val response = repository.getUserQuery(userName)
             _userQuery.value = response
             loading.value = false
         }

@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val toolbar = findViewById<Toolbar>(R.id.tool)
-
         userAdapter = UserQueryAdapter(this, listUserQuery) {
             val intent = Intent(this, Userdetail::class.java)
             intent.putExtra(USERNAME, it)
@@ -46,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getUserQuery("a")
+        viewModel.getUserQuery()
         viewModel.userQuery.observe(this, { response ->
             response.body()?.items.let {
                 if (it != null) {
@@ -78,7 +76,17 @@ class MainActivity : AppCompatActivity() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     if (query != null) {
-                        goUserQuery(query)
+                        viewModel.getQueryUser(query)
+                        viewModel.getUserQuery()
+
+                        fadeIn()
+                        viewModel.loading.observe(this@MainActivity, {
+                            if (it) {
+                                progressBar.visibility = View.VISIBLE
+                            } else {
+                                progressBar.visibility = View.GONE
+                            }
+                        })
                     }
                     return true
                 }
@@ -90,20 +98,6 @@ class MainActivity : AppCompatActivity() {
             })
         }
         return true
-    }
-
-    fun goUserQuery(query: String) {
-        viewModel.getUserQuery(query)
-
-        fadeIn()
-        viewModel.loading.observe(this, {
-            if (it) {
-                progressBar.visibility = View.VISIBLE
-            } else {
-                progressBar.visibility = View.GONE
-            }
-        })
-
     }
 
     private fun fadeIn() {
