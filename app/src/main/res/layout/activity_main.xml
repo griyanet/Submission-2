@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="24dp"
-        android:text="3"
+        android:text="@string/internet_down"
         android:textColor="@android:color/white"
         android:textStyle="italic"
         android:visibility="gone"

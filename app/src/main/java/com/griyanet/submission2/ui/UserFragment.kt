@@ -41,11 +41,9 @@ class UserFragment : Fragment() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.getUser()
-        viewModel.usersResponse.observe(viewLifecycleOwner, Observer {
-            it.body()?.let {
-                if (it != null) {
-                    userAdapter.setData(it)
-                }
+        viewModel.usersResponse.observe(viewLifecycleOwner, Observer { response ->
+            response.body()?.let {
+                userAdapter.setData(it)
             }
         })
         viewModel.usersResponse.observe(viewLifecycleOwner, Observer {

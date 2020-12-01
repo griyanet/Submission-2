@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        userAdapter = UserQueryAdapter(this, listUserQuery) {
+        userAdapter = UserQueryAdapter(listUserQuery) {
             val intent = Intent(this, Userdetail::class.java)
             intent.putExtra(USERNAME, it)
             startActivity(intent)

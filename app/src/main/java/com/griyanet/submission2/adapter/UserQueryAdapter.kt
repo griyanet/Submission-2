@@ -11,12 +11,9 @@ import com.griyanet.submission2.model.Item
 import kotlinx.android.synthetic.main.row_itemuser.view.*
 
 class UserQueryAdapter(
-    private val context: Context,
     private var list: List<Item>,
     private val listener: (Item) -> Unit
 ) : RecyclerView.Adapter<UserQueryAdapter.UserViewHolder>() {
-
-    //private var userQueryList = ArrayList<Item>()
 
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun userBind(item: Item, listener: (Item) -> Unit) {
